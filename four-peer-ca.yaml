@@ -1,0 +1,76 @@
+version: '2'
+services:
+  baseimage:
+    build: ./baseimage
+    image: hyperledger/fabric-baseimage:latest
+
+  membersrvc:
+    image: hyperledger/fabric-membersrvc:x86_64-0.6.1-preview
+    extends:
+      file: base/membersrvc.yaml
+      service: membersrvc
+
+  vp0:
+    image: hyperledger/fabric-peer:x86_64-0.6.1-preview
+    extends:
+      file: base/peer-unsecure-base.yaml
+      service: peer-unsecure-base
+    ports:
+      - "7050:7050"
+      - "7051:7051"
+      - "7053:7053"
+    environment:
+      - CORE_PEER_ID=vp0
+    links:
+      - membersrvc
+    volumes:
+      - /home/localuser/workspace:/chaincode
+
+  vp1:
+    image: hyperledger/fabric-peer:x86_64-0.6.1-preview
+    extends:
+      file: base/peer-unsecure-base.yaml
+      service: peer-unsecure-base
+    ports:
+      - "8050:7050"
+      - "8051:7051"
+      - "8053:7053"
+    environment:
+      - CORE_PEER_DISCOVERY_ROOTNODE=vp0:7051
+      - CORE_PEER_ID=vp1
+    links:
+      - membersrvc
+      - vp0
+
+  vp2:
+    image: hyperledger/fabric-peer:x86_64-0.6.1-preview
+    extends:
+      file: base/peer-unsecure-base.yaml
+      service: peer-unsecure-base
+    ports:
+      - "9050:7050"
+      - "9051:7051"
+      - "9053:7053"
+    environment:
+      - CORE_PEER_DISCOVERY_ROOTNODE=vp0:7051
+      - CORE_PEER_ID=vp2
+    links:
+      - membersrvc
+      - vp0
+
+  vp3:
+    image: hyperledger/fabric-peer:x86_64-0.6.1-preview
+    extends:
+      file: base/peer-unsecure-base.yaml
+      service: peer-unsecure-base
+    ports:
+      - "10050:7050"
+      - "10051:7051"
+      - "10053:7053"
+    environment:
+      - CORE_PEER_DISCOVERY_ROOTNODE=vp0:7051
+      - CORE_PEER_ID=vp3
+    links:
+      - membersrvc
+      - vp0
+
