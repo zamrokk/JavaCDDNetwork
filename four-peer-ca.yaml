@@ -24,7 +24,7 @@ services:
     links:
       - membersrvc
     volumes:
-      - /home/localuser/workspace:/chaincode
+      - /Users/benjaminfuentes/git:/chaincode
 
   vp1:
     image: hyperledger/fabric-peer:x86_64-0.6.1-preview
