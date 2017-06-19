@@ -13,8 +13,8 @@ services:
   vp0:
     image: hyperledger/fabric-peer:x86_64-0.6.1-preview
     extends:
-      file: base/peer-unsecure-base.yaml
-      service: peer-unsecure-base
+      file: base/peer-secure-base.yaml
+      service: peer-secure-base
     ports:
       - "7050:7050"
       - "7051:7051"
@@ -31,8 +31,8 @@ services:
   vp1:
     image: hyperledger/fabric-peer:x86_64-0.6.1-preview
     extends:
-      file: base/peer-unsecure-base.yaml
-      service: peer-unsecure-base
+      file: base/peer-secure-base.yaml
+      service: peer-secure-base
     ports:
       - "8050:7050"
       - "8051:7051"
@@ -49,8 +49,8 @@ services:
   vp2:
     image: hyperledger/fabric-peer:x86_64-0.6.1-preview
     extends:
-      file: base/peer-unsecure-base.yaml
-      service: peer-unsecure-base
+      file: base/peer-secure-base.yaml
+      service: peer-secure-base
     ports:
       - "9050:7050"
       - "9051:7051"
@@ -67,8 +67,8 @@ services:
   vp3:
     image: hyperledger/fabric-peer:x86_64-0.6.1-preview
     extends:
-      file: base/peer-unsecure-base.yaml
-      service: peer-unsecure-base
+      file: base/peer-secure-base.yaml
+      service: peer-secure-base
     ports:
       - "10050:7050"
       - "10051:7051"
